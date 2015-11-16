@@ -2,6 +2,8 @@
 % fixed to a wall and the other end to the mass. actually at this point
 % it's a particle, not a mass.
 
+% hello
+
 function piano_step_absolute_one()
 % absolute first step: satisfy louise's paranoia
 clf
@@ -31,7 +33,6 @@ Y_stuff = [y_initial, vy_initial];
         y = Y_stuff(1); %Unpack variables
         vy = Y_stuff(2); %Unpack variables
         ay = -k * (sqrt(x^2 + y^2) - x) * y / sqrt(x^2 + y^2); %Velocity equation (described by sheet) 
-%         ay = k * y^3 / (x^2 + y^2)^(3/2); %Acceleration (derivative of velocity) 
         delta_y = vy; % Change in y 
         delta_vy = ay; %Change in velocity of y
         derivs = [delta_y; delta_vy];
