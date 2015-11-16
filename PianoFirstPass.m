@@ -2,8 +2,6 @@
 % fixed to a wall and the other end to the mass. actually at this point
 % it's a particle, not a mass.
 
-% hello
-
 function piano_step_absolute_one()
 % absolute first step: satisfy louise's paranoia
 clf
