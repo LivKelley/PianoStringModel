@@ -36,10 +36,10 @@ State = [m1_i, m2_i, m3_i, dm1_i, dm2_i, dm3_i];
         dm2 = Info(5);
         dm3 = Info(6);
         
-        fs1 = -k * (sqrt(x^2 + m1^2) - x)*sign(m1);
-        fs2 = -k * (sqrt(x^2 + (m2-m1)^2) - x)*sign(m2-m1);
-        fs3 = -k * (sqrt(x^2 + (m3-m2)^2) - x)*sign(m3-m2);
-        fs4 = -k * (sqrt(x^2 + m3^2) - x)*sign(m3);
+        fs1 = (-k * (sqrt(x^2 + m1^2) - x)*sin(m1));
+        fs2 = (-k * (sqrt(x^2 + (m2-m1)^2) - x)*sin(m2-m1));
+        fs3 = (-k * (sqrt(x^2 + (m3-m2)^2) - x)*sin(m3-m2));
+        fs4 = (-k * (sqrt(x^2 + m3^2) - x)*sin(m3));
         
         fm1 = fs1 - fs2;
         fm2 = fs2 - fs3;
@@ -53,7 +53,7 @@ State = [m1_i, m2_i, m3_i, dm1_i, dm2_i, dm3_i];
     end
 
 plot(T,Y(:,1));
-plot(T,Y(:,2));
+ plot(T,Y(:,2));
 plot(T,Y(:,3));
 
 end
