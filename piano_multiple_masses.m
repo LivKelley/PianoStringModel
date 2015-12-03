@@ -12,8 +12,8 @@ m = 1;
 
 % here's a lot of initial values theoretically
 
-m1_i = .5;
-m2_i = 0;
+m1_i = 0;
+m2_i = 0.5;
 m3_i = 0;
 
 dm1_i = 0;
@@ -24,7 +24,7 @@ State = [m1_i, m2_i, m3_i, dm1_i, dm2_i, dm3_i];
 
 %% an ode function
 
-[T, Y] = ode45(@motion, [0,1], State);
+[T, Y] = ode45(@motion, [0,100], State);
 
 %% a motion function
 
@@ -52,10 +52,10 @@ State = [m1_i, m2_i, m3_i, dm1_i, dm2_i, dm3_i];
         res = [dm1; dm2; dm3; am1; am2; am3];
     end
 
-axis([0,15,-.5,.5]);
-plot(T,Y(:,1),'r*-');
-plot(T,Y(:,2),'g*-');
-plot(T,Y(:,3),'bo-');
+% axis([0,15,-.5,.5]);
+plot(T,Y(:,1),'-');
+plot(T,Y(:,2),'-');
+plot(T,Y(:,3),'-');
 xlabel('Time') 
 ylabel('Position') 
 title('Multiple Masses Wire Movement') 
