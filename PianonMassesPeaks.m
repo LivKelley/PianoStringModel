@@ -81,6 +81,7 @@ function PianonMassesPeaks()
         pks = findpeaks(Y(:,10)); %This finds peaks!
         Frequency = numel(pks)/T(end); %Amplitude output
         disp(Frequency)
+        
         %% tell it how to plot
         ylabel('Peak Height');
         xlabel('Time');
