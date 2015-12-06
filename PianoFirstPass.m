@@ -12,11 +12,11 @@ hold on
 %% parameters might be important
 
 k = 10;                 % completely arbitrary k value of springs
-x = 2;                  % at rest length of springs
+x = 5.5;                  % at rest length of springs
 
 %% initial values could also be important
 
-y_initial = -1;         % initial y position 
+y_initial = 1;         % initial y position 
 vy_initial = 0;         % initial y velocity
 lower_bound = - y_initial - 1;
 upper_bound = y_initial +1;
@@ -25,7 +25,7 @@ Y_stuff = [y_initial, vy_initial];
 
 %% now we get to make an ode function
 
-[T,Y] = ode45(@vibration, [0, 15], Y_stuff);
+[T,Y] = ode45(@vibration, [0, 100], Y_stuff);
 
 %% now we get to make a function for the ode
 
@@ -44,7 +44,7 @@ Velocity = Y(1:end, 1);
 
 %% now how to make a graph
 plot(T,Velocity);
-axis([0, 15, -2, 2]);
+axis([0, 100, -1, 1]);
 
 %% now we label the graph 
 xlabel('Time'); 
