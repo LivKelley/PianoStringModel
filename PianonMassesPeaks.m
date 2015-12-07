@@ -76,13 +76,16 @@ function PianonMassesPeaks()
         end
         
         %% Find Peaks
-        
-        %    for x = 1:n;
+
         pks = findpeaks(Y(:,10)); %This finds peaks!
         Frequency = numel(pks)/T(end); %Amplitude output
         disp(Frequency)
         
         %% tell it how to plot
+       
+for j = 1:n;
+    plot(T, Y(:,j));
+end 
         ylabel('Peak Height');
         xlabel('Time');
         title('Position of masses vs. time');
