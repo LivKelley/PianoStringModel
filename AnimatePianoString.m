@@ -17,12 +17,16 @@ m = 1;          % mass of masses, totally arbitrary
 % velocities, so for n = 3, State = [p1;p2;p3;v1;v2;v3]
 State = zeros(1,2*n);
 
-% this makes the middle mass be at .5
-if mod(n,2) == 0
-    State(n/2) = .5;
-else
-    State(n/2 + .5) = .5;
-end
+% this makes the masses initial condition a sine curve
+Vector = linspace(0,pi,n);
+State = sin(Vector);
+
+% % this makes the middle mass be at .5
+% if mod(n,2) == 0
+%     State(n/2) = .5;
+% else
+%     State(n/2 + .5) = .5;
+% end
 
 %% a vector for the for loop
 
@@ -31,7 +35,7 @@ vm_vector = zeros(n,1);
 
 %% an ode function
 
-[T, Y] = ode45(@motion, [0,100], State);
+[T, Y] = ode45(@motion, [0:.01:10], State);
 
 %% the actual most important motion function
 
@@ -81,33 +85,39 @@ vm_vector = zeros(n,1);
 % disp(Frequency)
 
 %% Make an X Vector
-X = linspace(1,n,n);
+figure;
+ pause;
 
-animate_func(T,n);
+for i=1:1000;plot(Y(i,1:100),'o');axis([0 100 -.5 .5]);drawnow;end
+pause
+% 
+% X = linspace(1,n,n);
 
-%% tell it how to plot
-    function animate_func(time,number)
-        
-        % Animates the string. Should plot y direction and create connectors in
-        % between masses.
-        
-        % Minimums and maximums help define the axis.
-        
-        for t = 1:length(time) %Find syntax
-            % Prepares the function for graphing.
-            hold on
-            clf;
-            for j = 1:number % Defines the time interval for the function.
-                minX = X(1);  % Describes a minimum of a given period defined by n
-                maxX = X(end); %Input min and max based on the equation
-                minY = -.5; % Input min based on the equation
-                maxY = .5; % Input max based on the equation
-                axis(minX, maxX, minY, maxY); %Input decided axes %l/#*j (figure
-                draw_func(y(t,2j, 'or-')); %Draws the function plotting time by every second mass.
-            end
-            drawnow; % Continues drawing the function
-        end
-    end
+% animate_func(T,n);
+
+% %% tell it how to plot
+%     function animate_func(time,number)
+%         
+%         % Animates the string. Should plot y direction and create connectors in
+%         % between masses.
+%         
+%         % Minimums and maximums help define the axis.
+%         
+%         for t = 1:length(time) %Find syntax
+%             % Prepares the function for graphing.
+%             hold on
+%             clf;
+%             for j = 1:number % Defines the time interval for the function.
+%                 minX = X(1);  % Describes a minimum of a given period defined by n
+%                 maxX = X(end); %Input min and max based on the equation
+%                 minY = -.5; % Input min based on the equation
+%                 maxY = .5; % Input max based on the equation
+%                 axis(minX, maxX, minY, maxY); %Input decided axes %l/#*j (figure
+%                 draw_func(y(t,(1:.5*j), 'or-')); %Draws the function plotting time by every second mass.
+%             end
+%             drawnow; % Continues drawing the function
+%         end
+%     end
 
 %% Plot things
 ylabel('Position');
