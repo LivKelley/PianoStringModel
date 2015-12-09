@@ -4,7 +4,7 @@ clf
 hold on
 
 %% set the number of masses
-n = 100;
+n = 2;
 
 %% parameters and initial values and making a vector and things
 
@@ -24,6 +24,8 @@ else
     State(n/2 + .5) = .5;
 end
 
+
+
 %% a vector for the for loop
 
 am_vector = zeros(n,1);
@@ -31,7 +33,7 @@ vm_vector = zeros(n,1);
 
 %% an ode function
 
-[T, Y] = ode45(@motion, [0,100], State);
+[T, Y] = ode45(@motion, [0,50], State);
 
 %% the actual most important motion function
 
@@ -75,8 +77,9 @@ vm_vector = zeros(n,1);
     end
 
 %% tell it how to plot
+
 for j = 1:n;
-    plot(T, Y(:,j));
+    plot(Y(:,j));
 end
 ylabel('Position');
 xlabel('Time');
