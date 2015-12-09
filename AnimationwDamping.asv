@@ -13,7 +13,6 @@ k = 2;         % spring constant (currently totally arbitrary)
 x = .00065;    % x distance between masses, spring rest length
 m = 1;         % mass of masses, totally arbitrary
 b = .5;         % damping constant, totally arbitrary
-
   
 % that vector of positions and velocities (all positions, then all
 % velocities, so for n = 3, State = [p1;p2;p3;v1;v2;v3]
@@ -36,6 +35,8 @@ State = [4*sin(Vector),zeros(1,n)];
 
 am_vector = zeros(n,1);
 vm_vector = zeros(n,1);
+
+%% 
 
 
 %% an ode function

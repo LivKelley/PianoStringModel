@@ -1,4 +1,4 @@
-function AnimationwDamping()
+function res = AnimationwDamping_for_FindDampingTime(amplitude_initial)
 %% satisfying paranoia
 clf
 hold on
@@ -21,7 +21,7 @@ State = zeros(1,2*n);
 
 % this makes the masses initial condition a sine curve
 Vector = linspace(0,pi,n); %Changed 3 pi back to pi. (12/9/2015) 
-State = [4*sin(Vector),zeros(1,n)];
+State = [amplitude_initial*sin(Vector),zeros(1,n)];
 % plot(State); <-- Old code for when we were moving one mass to an extreme
 % value (Not realistic.) 
 
@@ -40,7 +40,7 @@ vm_vector = zeros(n,1);
 
 %% an ode function
 
-[T, Y] = ode45(@motion, [0:10:5000], State);
+[T, Y] = ode45(@motion, [0:50:5000], State);
 
 %% the actual most important motion function
 
@@ -90,17 +90,20 @@ vm_vector = zeros(n,1);
 % disp(Frequency)
 
 %% Make an X Vector
-figure;
- pause;
- 
-size(Y)
-for i=1:1000
-    plot(Y(i,1:n));
-     axis([0 n -8 8]);
-    drawnow;
-    clf;
-end
-pause
+% figure;
+%  pause;
+%  
+% size(Y)
+% for i=1:1000
+%     plot(Y(i,1:n));
+%      axis([0 n -8 8]);
+%     drawnow;
+%     clf;
+% end
+% pause
 
+%% Make the output vector
+
+res = Y;
 
 end

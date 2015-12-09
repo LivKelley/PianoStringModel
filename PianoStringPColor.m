@@ -1,0 +1,3 @@
+AnimationwDamping
+
+pcolor(T, 

@@ -1,0 +1,17 @@
+function FindDampingTime ()
+
+Initial = linspace(.1,4,100,4);
+Y = linspace(1,100);
+
+for i = 1:100
+    X = (AnimationwDamping_for_FindDampingTime(Initial(i)));
+    for j = 1:20:5000
+        if max(X(j)) <= .01
+            Y(i) = max(X(j));
+        end
+    end
+end
+
+plot(Initial,Y);
+
+end
