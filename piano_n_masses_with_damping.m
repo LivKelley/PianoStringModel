@@ -8,23 +8,20 @@ n = 100;
 
 %% parameters and initial values and making a vector and things
 
-b = .01;
+b = .5;
 
 % parameters
-k = 10;         % spring constant (currently totally arbitrary)
-x = 1;          % x distance between masses, spring rest length
+k = 2;         % spring constant (currently totally arbitrary)
+x = .00065;          % x distance between masses, spring rest length
 m = 1;          % mass of masses, totally arbitrary
 
 % that vector of positions and velocities (all positions, then all
 % velocities, so for n = 3, State = [p1;p2;p3;v1;v2;v3]
 State = zeros(1,2*n);
 
-% this makes the middle mass be at .5
-if mod(n,2) == 0
-    State(n/2) = .5;
-else
-    State(n/2 + .5) = .5;
-end
+% this makes the masses initial condition a sine curve
+Vector = linspace(0,pi,n); %Changed 3 pi back to pi. (12/9/2015) 
+State = [4*sin(Vector),zeros(1,n)];
 
 %% a vector for the for loop
 
@@ -33,7 +30,7 @@ vm_vector = zeros(n,1);
 
 %% an ode function
 
-[T, Y] = ode45(@motion, [0,100], State);
+[T, Y] = ode45(@motion, [0:50:5000], State);
 
 %% the actual most important motion function
 
@@ -60,7 +57,7 @@ vm_vector = zeros(n,1);
         
         m_last = Info(n);
         
-        fs_last = (-k * (sqrt(x^2 + m_last^2) - x)*sign(-m_last)) - b*Info(2*n);
+        fs_last = (-k * (sqrt(x^2 + m_last^2) - x)*sign(-m_last)) - b*(-Info(2*n));
         fs_nearly_last = spring_force(Info(n - 1), Info(n), Info(2*n - 1), Info(2*n));
         
         fm_last = fs_nearly_last - fs_last;
