@@ -22,15 +22,6 @@ State = zeros(1,2*n);
 % this makes the masses initial condition a sine curve
 Vector = linspace(0,pi,n); %Changed 3 pi back to pi. (12/9/2015) 
 State = [amplitude_initial*sin(Vector),zeros(1,n)];
-% plot(State); <-- Old code for when we were moving one mass to an extreme
-% value (Not realistic.) 
-
- % this makes the middle mass be at .55
-% if mod(n,2) == 0
-%     State(n/2) = .5;
-% else
-%     State(n/2 + .5) = .5;
-% end
 
 %% a vector for the for loop
 
@@ -40,7 +31,7 @@ vm_vector = zeros(n,1);
 
 %% an ode function
 
-[T, Y] = ode45(@motion, [0:50:5000], State);
+[~, Y] = ode45(@motion, 0:50:5000, State);
 
 %% the actual most important motion function
 
@@ -82,25 +73,6 @@ vm_vector = zeros(n,1);
     function res = spring_force(m_n, m_n1, dm_n, dm_n1)
         res = (-k * (sqrt(x^2 + (m_n1 - m_n)^2) - x) * sign(m_n1 - m_n)) - b * (dm_n1 - dm_n);
     end
-
-%% Find Peaks
-%This function helps to define the periods of the graph.
-%pks = findpeaks(Y(:,10)); %This finds peaks!
-% Frequency = numel(pks)/T(end); %Amplitude output
-% disp(Frequency)
-
-%% Make an X Vector
-% figure;
-%  pause;
-%  
-% size(Y)
-% for i=1:1000
-%     plot(Y(i,1:n));
-%      axis([0 n -8 8]);
-%     drawnow;
-%     clf;
-% end
-% pause
 
 %% Make the output vector
 
