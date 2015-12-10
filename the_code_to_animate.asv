@@ -1,0 +1,20 @@
+function the_code_to_animate(Result_matrix)
+
+n = 100;
+
+figure;
+pause;
+
+size(Result_matrix);
+
+for j = 1:20
+    for i = 1:
+        clf
+        plot(Result_matrix(i,1:n));
+        axis([0 n -8 8]);
+        drawnow;
+    end
+    pause;
+end
+
+end

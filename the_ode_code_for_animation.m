@@ -1,4 +1,4 @@
-function piano_n_masses_with_damping_graph_a_single_line
+function res = the_ode_code_for_animation()
 %% satisfying paranoia
 clf
 hold on
@@ -8,13 +8,13 @@ n = 100;
 
 %% parameters and initial values and making a vector and things
 
-b = .5;
-
 % parameters
 k = 2;         % spring constant (currently totally arbitrary)
-x = .00065;          % x distance between masses, spring rest length
-m = 1;          % mass of masses, totally arbitrary
+x = .00065;    % x distance between masses, spring rest length
+m = 1;         % mass of masses, totally arbitrary
+b = .5;         % damping constant, totally arbitrary
 
+  
 % that vector of positions and velocities (all positions, then all
 % velocities, so for n = 3, State = [p1;p2;p3;v1;v2;v3]
 State = zeros(1,2*n);
@@ -28,19 +28,20 @@ State = [4*sin(Vector),zeros(1,n)];
 am_vector = zeros(n,1);
 vm_vector = zeros(n,1);
 
+
 %% an ode function
-tspan = linspace(1,5000, 1000);
-[T, Y] = ode45(@motion, tspan, State);
+
+[T, Y] = ode45(@motion, [0:10:5000], State);
 
 %% the actual most important motion function
 
     function res = motion(~, Info)
         m1 = Info(1);
 
-        fs1 = (-k * (sqrt(x^2 + m1^2) - x)*sign(m1))-b*Info(n +1);
+        fs1 = (-k * (sqrt(x^2 + m1^2) - x)*sign(m1))- b*Info(n +1);
         fs2 = spring_force(Info(1), Info(2), Info(n + 1), Info(n + 2));
         
-        fm1 = fs1 - fs2;
+        fm1 = fs1 - fs2;   
         
         am_vector(1) = fm1 / m;
         
@@ -73,10 +74,8 @@ tspan = linspace(1,5000, 1000);
         res = (-k * (sqrt(x^2 + (m_n1 - m_n)^2) - x) * sign(m_n1 - m_n)) - b * (dm_n1 - dm_n);
     end
 
-%% tell it how to plot
-plot(T, Y(:,n/2));
-ylabel('Position');
-xlabel('Time');
-title('Position of masses vs. time');
+X = Y(:,1:100);
+
+res = X;
 
 end
